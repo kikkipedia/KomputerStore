@@ -1,7 +1,7 @@
 
 //self executing function 
 (async function (){
-    const picture = document.createElement("img") 
+    const picture = document.getElementById('computerImage') 
 
     const laptopsDropdown = document.getElementById('laptops')
     const laptopInfo = document.getElementById('laptop-info')
@@ -43,13 +43,13 @@
     //shows info about selected laptop
     const handleLaptopChange = (e) => {
         const selectedLaptop = laptops[e.target.selectedIndex]
-        //TODO! Image not working
+        //TODO! One image has broken URL
         //TODO! show list of specs
         price.innerText = selectedLaptop.price
         description.innerText = selectedLaptop.description
         title.innerText = selectedLaptop.title
-        picture.src= "https://noroff-komputer-store-api.herokuapp.com/computers/" + selectedLaptop.image
-        picture.alt = "image"     
+        picture.src= "https://noroff-komputer-store-api.herokuapp.com/" + selectedLaptop.image
+        picture.alt = "image"
     } 
 
     //work and earn 100 kr by clicking the work button
@@ -74,8 +74,9 @@
         }
         else {
             const loan = prompt("Please enter the amount you wish to loan: ")
+            //not working as expected??
             if (loan > parseFloat(bankSum.innerHTML) * 2){
-                alert("Your loan must be smaller")
+                alert("You must have more money on the bank to be able to take a loan!")
              }
             else {
                 loanSum.innerHTML = loan

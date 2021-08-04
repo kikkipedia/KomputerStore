@@ -13,8 +13,10 @@
         <!-- Bank balance -->
         <div class="card">
             <h2>Bank</h2>
-            <p>Balance: <span id="bankSum"></span></p>
-            <p>Loan <span id="loanSum"></span></p> not visible!
+            <p><span id="bankSum"></span></p>
+            <div id="loanDiv">
+                <p><span id="loanSum"></span></p>
+            </div>          
             <p class="center">
                 <button class="redButton" id="loanButton">Get a loan</button>
             </p>           
@@ -23,10 +25,11 @@
         <!-- Work and earn money -->
         <div class="card">
             <h2>Work</h2>
-            <p>Pay <span id="workSum"></span> kr</p>
-            <p class="center">
+            <p><span id="workSum"></span></p>
+            <div>
                 <button id="bankButton" class="greenButton">Bank</button>
-                <button id="workButton" class="blueButton">Work</button></p> 
+                <button id="workButton" class="blueButton">Work</button>
+            </div> 
         </div>
 
         <!-- Compupters avaliable to buy (via API) -->
@@ -36,27 +39,26 @@
                 <select id="laptops"></select>
             </p>
             <h4>Features:</h4>
-            <div class="laptopFeatures">
-                lista
-            </div>
+            <div id="list"></div>
         </div>
     </div>
 
     <!-- Info about selected computer & buy button -->
-    <div class="card">
-        <table>
-            <tr>
-                <td><img id="computerImage"></td>
-                <td>
-                    <h2><span id="title"></span></h2>
-                    <p><span id="description"></span></p>
-                </td>
-                <td><h2><span id="price"></span></h2>
-                    <p><button class="greenButton">Buy!</button></p>
-                </td>
-            </tr>
-        </table>      
-        
+    <div class="center laptopDiv">
+        <div class="laptopCard">     
+            <table>
+                <tr>
+                    <td><img id="computerImage"></td>
+                    <td>
+                        <h3><span id="title"></span></h3>
+                        <p><span id="description"></span></p>
+                    </td>
+                    <td><h2><span id="price"></span></h2>
+                        <p><button class="greenButton">Buy!</button></p>
+                    </td>
+                </tr>
+            </table>
+        </div>       
     </div>
     <script src="app.js"></script>
 </body>

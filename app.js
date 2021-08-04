@@ -1,16 +1,19 @@
 
 //self executing function 
 (async function (){
+    const picture = document.createElement("img") 
+
     const laptopsDropdown = document.getElementById('laptops')
     const laptopInfo = document.getElementById('laptop-info')
     const price = document.getElementById('price')
     const description = document.getElementById('description')
     const title = document.getElementById('title')
-    const image = document.getElementById('image')
     const workButton = document.getElementById('workButton')
     const workSum = document.getElementById('workSum')
     const bankButton = document.getElementById('bankButton')
     const bankSum = document.getElementById('bankSum')
+    const loanButton = document.getElementById('loanButton')
+    const loanSum = document.getElementById('loanSum')
 
     //fetches all laptops from API
     async function getLaptops() {
@@ -21,8 +24,7 @@
         } catch (error) {
             console.log("Error: " + error)
         }
-    }
-    
+    }   
     const laptops = await getLaptops()
     
     console.log(laptops)
@@ -40,15 +42,14 @@
 
     //shows info about selected laptop
     const handleLaptopChange = (e) => {
-        const picture = document.createElement("img")
         const selectedLaptop = laptops[e.target.selectedIndex]
-
+        //TODO! Image not working
+        //TODO! show list of specs
         price.innerText = selectedLaptop.price
         description.innerText = selectedLaptop.description
         title.innerText = selectedLaptop.title
         picture.src= "https://noroff-komputer-store-api.herokuapp.com/computers/" + selectedLaptop.image
-        picture.alt = "image"
-        // image.appendChild(picture)        
+        picture.alt = "image"     
     } 
 
     //work and earn 100 kr by clicking the work button
@@ -60,16 +61,32 @@
     }
 
     //transfers the money from work balance to bank balance
-    let bank = 0
     function payToBank() {
-        //bank+=paySum.innerHTML
-        console.log(workSum.innerHTML)
+        //TODO! if has outstanding loan
         bankSum.innerHTML=workSum.innerHTML
+    }
+
+    //take a loan and fulfill requirements
+    function takeLoan() {
+        let currentLoan = loanSum.innerHTML
+        if (currentLoan > 0) {
+            alert("Pay back you current loan first!")
+        }
+        else {
+            const loan = prompt("Please enter the amount you wish to loan: ")
+            if (loan > parseFloat(bankSum.innerHTML) * 2){
+                alert("Your loan must be smaller")
+             }
+            else {
+                loanSum.innerHTML = loan
+            }
+        }
     }
 
     laptopsDropdown.addEventListener("change", handleLaptopChange)
     workButton.addEventListener("click", handleWorkClick)
     bankButton.addEventListener("click", payToBank)
+    loanButton.addEventListener("click", takeLoan)
 
 })()
 

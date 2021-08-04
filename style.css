@@ -2,6 +2,10 @@ body {
     font-family: arial;
 }
 
+.center {
+  text-align: center;
+}
+
 .header {
     background-color: pink;
     text-align: center;
@@ -30,3 +34,10 @@ body {
     grid-column-gap: 5px;
     grid-row-gap: 4px;
     }
+
+    
+th, td {
+  padding: 15px;
+  border: 1px solid black;
+}
+    

@@ -5,41 +5,52 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <script type="text/javascript" src="bank.js"></script>
     <div class="header">
         <h1>KomputerStore</h1>
     </div>
     <div class="parent">
+
         <!-- Bank balance -->
         <div class="card">
             <h2>Bank</h2>
-            <div class="balance">
-                Balance
-            </div>
-            <div class="loan">
-                Loan
-            </div>
-            <button>Get a loan</button>
+            <p>Balance: <span id="bankSum"></span></p>
+            <p>Loan <span id="loan"></span></p> not visible!
+            <p class="center"><button>Get a loan</button></p>           
         </div>
+
         <!-- Work and earn money -->
         <div class="card">
             <h2>Work</h2>
-            <p>
-                work work work
-            </p>
+            <p>Pay <span id="workSum"></span> kr</p>
+            <p class="center"><button id="bankButton">Bank</button><button id="workButton">Work</button></p> 
         </div>
         <!-- Laptops avaliable to buy (via API) -->
         <div class="card">
-            <h2>Laptop</h2>
+            <h2>Laptops</h2>
             <p>
-                <select id="laptop-dropdown">
-                </select>
+                <select id="laptops"></select>
             </p>
+            <h4>Features:</h4>
+            <div class="laptopFeatures">
+                lista
+            </div>
         </div>
     </div>
     <div class="card">
-        <h2>Laptop info</h2>
+        <table>
+            <tr>
+                <td></td>
+                <td><h2><span id="title"></span></h2></td>
+                <td><h2><span id="price"></span></h2></td>
+            </tr>
+            <tr>
+                <td><div class="image" id="image"></div></td>
+                <td><p><span id="description"></span></p></td>
+                <td><button>Buy it!</button></td>
+            </tr>
+        </table>      
+        
     </div>
-
+    <script src="app.js"></script>
 </body>
 </html>

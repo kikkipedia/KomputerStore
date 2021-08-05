@@ -1,9 +1,6 @@
 /* 
 Todos:
-- payToBank not working - set pay to 0 again
 - show first laptop at render
-- not be able to take a loan if bank = zero
-- hide loan if loan = 0
 - One image has broken URL
 - delete unnecessary code
 - style css
@@ -23,6 +20,7 @@ const bankSum = document.getElementById('bankSum')
 const loanButton = document.getElementById('loanButton')
 const loanSum = document.getElementById('loanSum')
 const loanDiv = document.getElementById('loanDiv')
+const payLoanButton = document.getElementById('payLoanButton')
 
 let laptops = []
 let pay = 0
@@ -40,7 +38,6 @@ function getLaptops() {
         console.log("Error: " + error)
     }
 } 
-
 getLaptops()
 
 //adds laptops to select dropdown options
@@ -77,30 +74,46 @@ const handleLaptopChange = (e) => {
     picture.src= "https://noroff-komputer-store-api.herokuapp.com/" + selectedLaptop.image
     picture.alt = "image"
 }
-//bank and work functions
+
+//shows the balances
 const calculateBalance = () => {
     bankSum.innerText = "Bank: " + bank + " kr"
     workSum.innerText = "Pay: " + pay + " kr"
     loanSum.innerText = "Loan: " + loan + " kr"
-    //TODO if no loan - hidden
+    if (loan === 0) {
+        loanDiv.style.display = "none"
+        payLoanButton.style.display = "none"
+    }
+    else {
+        loanDiv.style.display = "block"
+        payLoanButton.style.display = "block"
+    }
 }
-
 calculateBalance()
     
 //work and earn 100 kr by clicking the work button
 const handleWorkClick = () => {
-    console.log(pay)
     pay += 100
     calculateBalance()
 }
 
-//send money frpom work to bank
+//send money from work to bank
 const handleBankClick = () => {
-    bank += pay
-    pay = 0
+    if (loan > 0) {
+        //deduct 10% and pay loan with it
+        let deduction = pay * 0.10
+        bank += pay - deduction
+        loan -= deduction
+        pay = 0
+    }
+    else {
+        bank += pay
+        pay = 0
+    }
     calculateBalance()
 }
 
+//take a loan but most 2x bank balance
 const takeLoan = () => {
     if (loan > 0) {
         alert("Pay back you current loan first!")
@@ -117,7 +130,16 @@ const takeLoan = () => {
     calculateBalance()
 }
 
+const repayLoan = () => {
+    loan -= pay
+    if (loan <= 0) {
+        loan = 0
+    }
+    calculateBalance()
+}
+
+laptopsDropdown.addEventListener("change", handleLaptopChange)
 workButton.addEventListener("click", handleWorkClick)
 bankButton.addEventListener("click", handleBankClick)
 loanButton.addEventListener("click", takeLoan)
-laptopsDropdown.addEventListener("change", handleLaptopChange)
+payLoanButton.addEventListener("click", repayLoan)

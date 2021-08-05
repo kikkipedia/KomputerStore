@@ -161,5 +161,5 @@ bankButton.addEventListener("click", handleBankClick)
 loanButton.addEventListener("click", takeLoan)
 payLoanButton.addEventListener("click", repayLoan)
 buyButton.addEventListener("click", buyComputer)
-//removes img src on broken link
+//checks if image link is missing
 document.addEventListener('DOMContentLoaded', imageMissing)

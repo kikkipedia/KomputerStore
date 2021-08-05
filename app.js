@@ -137,8 +137,7 @@ const repayLoan = () => {
 
 const buyComputer = () => {
     const computerPrice = parseFloat(price.innerText)
-    const totalAmount = bank + loan
-    if(totalAmount < computerPrice) {
+    if(bank < computerPrice) {
         alert("You dont have enough money!")
     }
     else {

@@ -117,11 +117,12 @@ const takeLoan = () => {
             alert("You must have more money on the bank to be able to take a loan!")
         }
         else {
-            bank += newLoan
+            bank += parseInt(newLoan)
             loan = newLoan
+            calculateBalance()
         }
     }
-    calculateBalance()
+    
 }
 
 //repay the loan
@@ -130,6 +131,7 @@ const repayLoan = () => {
     if (loan <= 0) {
         loan = 0
     }
+    pay = 0
     calculateBalance()
 }
 

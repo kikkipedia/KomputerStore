@@ -1,11 +1,3 @@
-/* 
-Todos:
-- show first laptop at render
-- One image has broken URL
-- delete unnecessary code
-- style css
-*/
-
 //get html-elements as variables
 const picture = document.getElementById('computerImage') 
 const laptopsDropdown = document.getElementById('laptops')
@@ -21,6 +13,7 @@ const loanButton = document.getElementById('loanButton')
 const loanSum = document.getElementById('loanSum')
 const loanDiv = document.getElementById('loanDiv')
 const payLoanButton = document.getElementById('payLoanButton')
+const buyButton = document.getElementById('buyButton')
 
 let laptops = []
 let pay = 0
@@ -113,7 +106,7 @@ const handleBankClick = () => {
     calculateBalance()
 }
 
-//take a loan but most 2x bank balance
+//take a loan but at most 2 times the bank balance
 const takeLoan = () => {
     if (loan > 0) {
         alert("Pay back you current loan first!")
@@ -124,12 +117,14 @@ const takeLoan = () => {
             alert("You must have more money on the bank to be able to take a loan!")
         }
         else {
+            bank += newLoan
             loan = newLoan
         }
     }
     calculateBalance()
 }
 
+//repay the loan
 const repayLoan = () => {
     loan -= pay
     if (loan <= 0) {
@@ -138,8 +133,33 @@ const repayLoan = () => {
     calculateBalance()
 }
 
+const buyComputer = () => {
+    const computerPrice = parseFloat(price.innerText)
+    const totalAmount = bank + loan
+    if(totalAmount < computerPrice) {
+        alert("You dont have enough money!")
+    }
+    else {
+        bank -= computerPrice
+        alert("Congratulations! You are now the owner of " + title.innerText)
+        calculateBalance()
+    }
+}
+
+//removes img src if broken link
+const imageMissing = () => {
+    document.querySelectorAll('img').forEach(img => {
+        img.onerror = () => {
+            img.style.display = 'none'
+        }
+    })
+}
+
 laptopsDropdown.addEventListener("change", handleLaptopChange)
 workButton.addEventListener("click", handleWorkClick)
 bankButton.addEventListener("click", handleBankClick)
 loanButton.addEventListener("click", takeLoan)
 payLoanButton.addEventListener("click", repayLoan)
+buyButton.addEventListener("click", buyComputer)
+//removes img src on broken link
+document.addEventListener('DOMContentLoaded', imageMissing)

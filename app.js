@@ -27,10 +27,13 @@ function getLaptops() {
         .then(response => response.json())
         .then(data => laptops = data)
         .then(laptops => addLaptopsToSelect(laptops))
+        renderFirstComputer(laptops)
     } catch (error) {
         console.log("Error: " + error)
     }
 } 
+
+//fetch at startup
 getLaptops()
 
 //adds laptops to select dropdown options
@@ -137,7 +140,10 @@ const repayLoan = () => {
 
 const buyComputer = () => {
     const computerPrice = parseFloat(price.innerText)
-    if(bank < computerPrice) {
+    if (!computerPrice) {
+        alert("Please select a computer to buy")
+    }
+    else if(bank < computerPrice) {
         alert("You dont have enough money!")
     }
     else {

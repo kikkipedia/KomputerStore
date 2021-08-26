@@ -1,5 +1,5 @@
-# KomputerStore
-Dynamic web page using Vanilla JS
+# KomputerStore :computer: :money_with_wings:
+Dynamic web page using Vanilla JS 
 
 ## Description
 The app has three areas:

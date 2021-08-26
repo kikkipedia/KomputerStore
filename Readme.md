@@ -1,5 +1,6 @@
-# KomputerStore :computer: :money_with_wings:
-Dynamic web page using Vanilla JS 
+# Vanilla JS KomputerStore :computer: :money_with_wings:
+
+Dynamic web page using Vanilla JS
 
 The app has three areas:
 - Work, where you can earn money through working
